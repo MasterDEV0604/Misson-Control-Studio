@@ -1,0 +1,9 @@
+/build/
+/.idea/
+/.vscode/
+*.user
+*.pro.user
+CMakeUserPresets.json
+*.autosave
+/artifacts/*.html
+/artifacts/*.md

@@ -1,0 +1,82 @@
+{
+  "id": "scn_convoy_guard",
+  "name": "Convoy Guard",
+  "summary": "Escort two ground assets through three checkpoints while monitoring aerial recon tracks and dynamic risk sectors.",
+  "missions": [
+    {
+      "id": "m1",
+      "title": "Escort Main Convoy",
+      "objective": "Maintain route continuity to checkpoint gamma.",
+      "areaName": "North Corridor",
+      "routes": [
+        {
+          "entityId": "trk_alpha",
+          "label": "Alpha Route",
+          "points": [
+            {
+              "x": 60,
+              "y": 70,
+              "etaSeconds": 0
+            },
+            {
+              "x": 180,
+              "y": 120,
+              "etaSeconds": 90
+            },
+            {
+              "x": 280,
+              "y": 160,
+              "etaSeconds": 210
+            },
+            {
+              "x": 420,
+              "y": 220,
+              "etaSeconds": 380
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "trk_alpha",
+      "displayName": "Alpha-1",
+      "type": "UGV",
+      "x": 60,
+      "y": 70,
+      "vx": 0.8,
+      "vy": 0.25,
+      "headingDeg": 15,
+      "confidence": 0.96,
+      "status": "nominal",
+      "health": "green"
+    },
+    {
+      "id": "trk_bravo",
+      "displayName": "Bravo-2",
+      "type": "UGV",
+      "x": 90,
+      "y": 110,
+      "vx": 0.6,
+      "vy": 0.18,
+      "headingDeg": 12,
+      "confidence": 0.92,
+      "status": "nominal",
+      "health": "green"
+    },
+    {
+      "id": "trk_recon",
+      "displayName": "Recon-7",
+      "type": "UAV",
+      "x": 210,
+      "y": 80,
+      "vx": 1.1,
+      "vy": 0.12,
+      "headingDeg": 4,
+      "confidence": 0.89,
+      "status": "monitor",
+      "health": "amber"
+    }
+  ]
+}

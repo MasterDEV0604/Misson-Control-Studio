@@ -1,0 +1,6 @@
+QMainWindow { background: #1f2430; }
+QWidget { color: #d8dee9; background: #2b3245; }
+QTableView, QListWidget, QTextEdit, QPlainTextEdit { background: #202635; border: 1px solid #3c455d; }
+QMenuBar, QMenu, QStatusBar, QToolBar { background: #252c3d; }
+QDockWidget::title { background: #313a50; padding: 4px; }
+QPushButton { background: #3c455d; padding: 5px 10px; border: 1px solid #4c5673; }

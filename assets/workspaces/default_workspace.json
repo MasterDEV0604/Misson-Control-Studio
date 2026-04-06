@@ -1,0 +1,10 @@
+{
+  "lastScenarioPath": "assets/scenarios/convoy_guard.json",
+  "activeOverlayProfile": "dark-ops",
+  "hiddenPanels": [],
+  "playbackRate": 1.0,
+  "followSelection": true,
+  "showThreatRings": true,
+  "windowGeometry": "restore-locally",
+  "windowState": "restore-locally"
+}

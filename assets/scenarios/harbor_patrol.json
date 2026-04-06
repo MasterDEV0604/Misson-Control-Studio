@@ -1,0 +1,82 @@
+{
+  "id": "scn_harbor_patrol",
+  "name": "Harbor Patrol",
+  "summary": "Supervise patrol craft and shoreline observation assets across a harbor approach.",
+  "missions": [
+    {
+      "id": "m3",
+      "title": "Harbor Sweep",
+      "objective": "Preserve line-of-sight coverage and investigate route anomalies.",
+      "areaName": "Pier Sector",
+      "routes": [
+        {
+          "entityId": "trk_marine",
+          "label": "Marine Patrol",
+          "points": [
+            {
+              "x": 40,
+              "y": 340,
+              "etaSeconds": 0
+            },
+            {
+              "x": 120,
+              "y": 320,
+              "etaSeconds": 85
+            },
+            {
+              "x": 200,
+              "y": 300,
+              "etaSeconds": 170
+            },
+            {
+              "x": 320,
+              "y": 270,
+              "etaSeconds": 300
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "trk_marine",
+      "displayName": "Patrol-4",
+      "type": "USV",
+      "x": 40,
+      "y": 340,
+      "vx": 0.7,
+      "vy": -0.1,
+      "headingDeg": -5,
+      "confidence": 0.94,
+      "status": "nominal",
+      "health": "green"
+    },
+    {
+      "id": "trk_shore",
+      "displayName": "ShoreCam-A",
+      "type": "Sensor",
+      "x": 360,
+      "y": 160,
+      "vx": 0.0,
+      "vy": 0.0,
+      "headingDeg": 0,
+      "confidence": 1.0,
+      "status": "fixed",
+      "health": "green"
+    },
+    {
+      "id": "trk_unknown",
+      "displayName": "Unknown-9",
+      "type": "Surface",
+      "x": 260,
+      "y": 260,
+      "vx": -0.25,
+      "vy": 0.05,
+      "headingDeg": 170,
+      "confidence": 0.67,
+      "status": "watch",
+      "health": "red"
+    }
+  ]
+}

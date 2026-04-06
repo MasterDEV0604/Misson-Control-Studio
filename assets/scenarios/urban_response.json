@@ -1,0 +1,82 @@
+{
+  "id": "scn_urban_response",
+  "name": "Urban Response",
+  "summary": "Coordinate two rapid response units and one observation drone in a dense urban map.",
+  "missions": [
+    {
+      "id": "m2",
+      "title": "Secure District",
+      "objective": "Stabilize priority intersections and maintain overwatch.",
+      "areaName": "District 4",
+      "routes": [
+        {
+          "entityId": "trk_delta",
+          "label": "Delta Route",
+          "points": [
+            {
+              "x": 120,
+              "y": 260,
+              "etaSeconds": 0
+            },
+            {
+              "x": 160,
+              "y": 240,
+              "etaSeconds": 60
+            },
+            {
+              "x": 220,
+              "y": 210,
+              "etaSeconds": 140
+            },
+            {
+              "x": 300,
+              "y": 180,
+              "etaSeconds": 250
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "trk_delta",
+      "displayName": "Delta-3",
+      "type": "UGV",
+      "x": 120,
+      "y": 260,
+      "vx": 0.5,
+      "vy": -0.2,
+      "headingDeg": -10,
+      "confidence": 0.93,
+      "status": "nominal",
+      "health": "green"
+    },
+    {
+      "id": "trk_echo",
+      "displayName": "Echo-5",
+      "type": "UGV",
+      "x": 150,
+      "y": 290,
+      "vx": 0.4,
+      "vy": -0.15,
+      "headingDeg": -18,
+      "confidence": 0.9,
+      "status": "delayed",
+      "health": "amber"
+    },
+    {
+      "id": "trk_watch",
+      "displayName": "Watch-1",
+      "type": "UAV",
+      "x": 260,
+      "y": 110,
+      "vx": 0.3,
+      "vy": 0.05,
+      "headingDeg": 8,
+      "confidence": 0.95,
+      "status": "monitor",
+      "health": "green"
+    }
+  ]
+}
