@@ -1,17 +1,19 @@
 # Roadmap
 
 ## Near-term
-- Add workspace autosave timer.
-- Add scenario diff viewer.
-- Add bookmarkable timeline events.
-- Add heatmap overlay for route congestion.
+- session manager with recent files and templates
+- bookmark browser and incident tagging
+- validation panel with severity filtering
+- richer debrief export profiles
 
 ## Mid-term
-- Add plugin interface for external detections/tracks.
-- Add chart dock for confidence and health trends.
-- Add undo/redo stack for planner edits.
+- route editor with drag handles on the map
+- map annotation layers
+- keyboard shortcuts and command palette
+- timeline bookmarks with jump navigation
 
 ## Long-term
-- Add mission package import/export.
-- Add remote telemetry playback adapter.
-- Add configurable policy engine for alerts and warnings.
+- multi-user review mode
+- plugin interface for data feeds
+- richer metrics widgets and trend charts
+- remote scenario package synchronization

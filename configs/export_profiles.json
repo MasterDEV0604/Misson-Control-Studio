@@ -1,0 +1,6 @@
+{
+  "profiles": [
+    {"name": "debrief_markdown", "includeEvents": true, "includeBookmarks": true, "includeNotes": true},
+    {"name": "incident_summary", "includeEvents": false, "includeBookmarks": true, "includeNotes": true}
+  ]
+}

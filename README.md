@@ -1,63 +1,77 @@
 # Mission Control Studio Ultimate
 
-Mission Control Studio Ultimate is a **Qt 6 / C++17 desktop operations workstation** for scenario planning, mission playback, live track supervision, overlay control, alert review, and operator debrief export.
+Mission Control Studio Ultimate is a **Qt 6 / C++17 autonomy operations workstation** for mission planning, live supervision, replay analysis, alert triage, operator note taking, and debrief export.
 
-This repository is intentionally built as a **flagship public portfolio project** that demonstrates the architecture, UX structure, and product workflow of a serious internal engineering tool without exposing restricted work.
+This repository is designed as a **public flagship portfolio project** that feels like a real internal engineering tool. The codebase intentionally separates the product into application, domain, service, simulation, and UI layers, and it includes scenario packages, rule packs, session templates, exported artifacts, architecture notes, and CI scaffolding.
 
-## Why this repo is stronger than a demo
+## Product vision
 
-It is organized like a real product:
+A field robotics or autonomy team needs a desktop application that can:
+- open scenario packages and validate them before execution
+- supervise multiple tracks on a shared operational map
+- highlight incidents such as route conflicts, degraded confidence, or rule violations
+- let operators add notes and bookmarks during playback
+- restore the previous workspace layout and recent session state
+- export a structured post-run debrief package
 
-- multi-dock operator workstation
-- application / domain / services / simulation / ui layers
-- scenario repository with validation and revision metadata
-- alert rule engine and health summary generation
-- route editing and timeline playback workflow
-- workspace persistence and recent-session restore
-- debrief export and artifacts directory
-- architecture docs, ADRs, screenshots guide, roadmap, and test notes
+This repository focuses on those workflows.
 
-## Product concept
+## What makes this repo feel closer to a real product
 
-An operator supervises multiple autonomous or semi-autonomous platforms inside a mapped mission area. The workstation supports:
+- **multi-dock workstation UI** with map, planner, alerts, notes, timeline, inspector, validation, health, and session panels
+- **scenario packages** with fictional but realistic mission metadata
+- **rule-pack loading** for operational alert profiles
+- **session persistence** for workspace layout and operator preferences
+- **bookmark and note capture** for replay/debrief workflows
+- **debrief export** with markdown summaries and incident tables
+- **docs, ADRs, scripts, configs, artifacts, and roadmap** instead of only source files
+- **CI scaffolding and tests directory** so the repository reads like an engineered application
 
-- opening and validating scenario packages
-- reviewing mission objectives and platform status
-- editing routes and waypoint timing
-- switching overlay layers and filtering tracks
-- replaying historical mission timelines
-- surfacing rule-based alerts and operator notes
-- exporting a post-run debrief package
-- restoring workstation layout and user preferences
+## Main workflows
+
+### 1) Pre-mission validation
+1. Open a scenario package from `assets/scenarios/`.
+2. Review issues in the validation panel.
+3. Load an alert rule pack from `assets/rulepacks/`.
+4. Confirm overlay defaults and route safety hints.
+
+### 2) Live supervision and playback
+1. Start playback or step through the mission timeline.
+2. Monitor tracks, threat rings, health state, and route conflict warnings.
+3. Add operator notes and incident bookmarks.
+4. Filter visible tracks and toggle map overlays.
+
+### 3) Debrief and export
+1. Open the bookmark/history panel.
+2. Review major mission events and operator comments.
+3. Export a debrief package to `artifacts/example_reports/`.
+4. Use the markdown report during post-run review.
 
 ## Repository layout
 
 ```text
 src/
-  app/              application orchestration and workspace state
-  domain/           mission, track, route, alert, overlay, scenario models
-  services/         repositories, validation, export, journaling, rules
-  simulation/       scheduler, playback engine, threat heuristics
+  app/                    application orchestration
+  domain/                 scenarios, tracks, notes, zones, bookmarks, health
+  services/               validation, persistence, rules, export, journaling
+  simulation/             timeline and playback engine
   ui/
-    dialogs/        settings, scenario editor, export dialogs
-    models/         qt models for tables and lists
-    widgets/        map, planner, timeline, browser, inspector, alerts, health
+    dialogs/              settings, scenario editor, session manager, rules
+    models/               Qt table/list models
+    widgets/              operator workstation panels
 assets/
-  scenarios/        fictional sample scenarios
-  styles/           qss themes
-  icons/            simple vector placeholders
-  workspaces/       saved workspace examples
-docs/
-  architecture.md
-  product_requirements.md
-  operator_walkthrough.md
-  roadmap.md
-  screenshots.md
-  adr/
+  scenarios/              fictional mission packages
+  rulepacks/              alert and policy profiles
+  session_templates/      canned operator workspace defaults
+  workspaces/             saved window/session snapshots
+  styles/                 QSS themes
+configs/                  repo-level defaults
+scripts/                  artifact and screenshot helper scripts
 artifacts/
-  example_reports/
-tests/
-  notes.md
+  example_reports/        exported debrief examples
+  screens/                placeholder screenshot notes
+.github/workflows/        CI scaffolding
+docs/                     architecture, workflows, screenshots, ADRs
 ```
 
 ## Build
@@ -65,7 +79,7 @@ tests/
 ### Requirements
 - Qt 6.5+
 - CMake 3.20+
-- A C++17 compiler
+- C++17 compiler
 
 ### Configure
 ```bash
@@ -78,27 +92,10 @@ cmake --build build -j
 ./build/mission_control_studio_ultimate
 ```
 
-## High-value operator workflows
+## Screenshot plan
 
-### Open and validate a scenario
-1. Start the application.
-2. Open a scenario from `assets/scenarios`.
-3. Review validation results in the status bar and event log.
-4. Inspect mission summary, overlays, and track table.
-
-### Plan and review a route change
-1. Select a track in the track table.
-2. Edit route points in the planner.
-3. Save the scenario revision from the Scenario Editor dialog.
-4. Review new event entries and threat warnings.
-
-### Run playback and export debrief
-1. Start playback from the timeline dock.
-2. Scrub, pause, speed up, and inspect key alerts.
-3. Export a markdown debrief package to `artifacts/`.
-
-## What to capture for GitHub screenshots
-See `docs/screenshots.md`.
+See `docs/screenshots.md` and `docs/mockups/` for the recommended GitHub presentation shots.
 
 ## Public portfolio note
-All missions, assets, track names, and scenario details in this repo are fictional and sanitized. The value of this project is the **software engineering shape**: UI composition, modular structure, state handling, validation, simulation plumbing, and product-oriented workflows.
+
+All missions, routes, entities, map names, and events are fictional and sanitized. The portfolio value is the **engineering shape** of the application: operator workflow, layered design, state handling, validation, persistence, replay, debrief export, and multi-panel UI composition.

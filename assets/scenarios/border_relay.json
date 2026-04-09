@@ -1,0 +1,22 @@
+{
+  "id": "border-relay-01",
+  "name": "Border Relay Exercise",
+  "summary": "A fictional relay and escort mission across checkpoint zones with supervision and route deconfliction needs.",
+  "recommendedRulePack": "balanced_ops.json",
+  "missions": [{
+    "id": "m1",
+    "title": "Relay corridor escort",
+    "objective": "Maintain relay chain and prevent route overlap near checkpoints.",
+    "areaName": "Northern corridor",
+    "routes": [{
+      "entityId": "alpha-1",
+      "label": "Escort A",
+      "points": [{"x": 25, "y": 40, "etaSeconds": 0}, {"x": 80, "y": 55, "etaSeconds": 120}, {"x": 135, "y": 72, "etaSeconds": 260}]
+    }]
+  }],
+  "zones": [{"id": "z1", "label": "Checkpoint Delta", "type": "checkpoint"}],
+  "tracks": [
+    {"id": "alpha-1", "displayName": "Escort Alpha", "type": "ground", "x": 25, "y": 40, "vx": 0.4, "vy": 0.1, "headingDeg": 15, "confidence": 0.92, "status": "nominal", "health": "green"},
+    {"id": "relay-2", "displayName": "Relay Node 2", "type": "support", "x": 52, "y": 48, "vx": 0.2, "vy": 0.0, "headingDeg": 0, "confidence": 0.84, "status": "nominal", "health": "green"}
+  ]
+}

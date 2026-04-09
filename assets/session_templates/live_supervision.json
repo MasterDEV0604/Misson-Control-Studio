@@ -1,0 +1,6 @@
+{
+  "name": "live_supervision",
+  "visibleDocks": ["Track Monitor", "Alerts", "Health", "Notes", "Timeline", "Layers"],
+  "playbackRate": 1.5,
+  "followSelection": false
+}

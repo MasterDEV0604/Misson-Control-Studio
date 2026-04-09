@@ -1,0 +1,8 @@
+{
+  "geometry": "placeholder",
+  "windowState": "placeholder",
+  "showThreatRings": true,
+  "showLabels": true,
+  "followSelection": true,
+  "selectedRulePack": "balanced_ops.json"
+}

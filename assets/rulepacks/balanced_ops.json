@@ -1,0 +1,13 @@
+{
+  "name": "balanced_ops",
+  "thresholds": {
+    "lowConfidence": 0.45,
+    "routeConflictDistance": 15.0,
+    "degradedHealthTriggersAlert": true
+  },
+  "policies": [
+    "warn_on_route_crossing",
+    "warn_on_health_degradation",
+    "warn_on_low_confidence"
+  ]
+}

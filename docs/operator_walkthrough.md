@@ -1,10 +1,23 @@
-# Operator Walkthrough
+# Operator walkthrough
 
-1. Launch the application and load `convoy_guard.json`.
-2. Observe mission objectives in the Inspector and live status in the Health panel.
-3. Use the Layer Control dock to toggle labels, threat rings, routes, and breadcrumbs.
-4. Select a track from the Track Monitor dock to focus the map and inspector.
-5. Adjust route timing in the Planner dock.
-6. Start playback and use the timeline to pause, step, and scrub.
-7. Review generated alerts in the Alerts dock and operator entries in the Event Log.
-8. Export a markdown debrief using the Export dialog.
+## Launch session
+1. Start the application.
+2. Restore the previous workspace or choose a session template.
+3. Open a scenario package.
+4. Load the matching alert rule pack.
+
+## Validate mission package
+1. Review warnings in the validation panel.
+2. Inspect route overlaps, missing mission metadata, or low-confidence track seeds.
+3. Correct issues in the scenario editor before playback.
+
+## Supervise mission
+1. Monitor the summary strip for active alerts and mission phase.
+2. Step or play the timeline.
+3. Add notes when incidents happen.
+4. Create bookmarks for points worth revisiting in debrief.
+
+## Run debrief
+1. Open bookmarks and event history.
+2. Export the report profile you need.
+3. Attach the markdown artifact to a review or retrospective.

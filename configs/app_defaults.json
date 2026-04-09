@@ -1,0 +1,9 @@
+{
+  "theme": "dark_ops",
+  "defaultRulePack": "balanced_ops.json",
+  "defaultPlaybackRate": 1.0,
+  "restoreWorkspaceOnLaunch": true,
+  "showThreatRings": true,
+  "showTrackLabels": true,
+  "maxRecentSessions": 8
+}

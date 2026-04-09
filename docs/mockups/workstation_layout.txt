@@ -1,0 +1,4 @@
+[Scenario Browser][Track Monitor][Planner]
+[             Map Canvas / Mission View              ][Inspector][Validation]
+[Summary Strip]
+[Alerts][Notes][Bookmarks][Event Log][Timeline]

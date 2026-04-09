@@ -9,10 +9,14 @@ class HealthPanelWidget;
 class InspectorWidget;
 class LayerControlWidget;
 class MapCanvas;
+class NotesWidget;
 class PlannerWidget;
 class ScenarioBrowserWidget;
+class SummaryStripWidget;
 class TimelineWidget;
 class TrackTableWidget;
+class ValidationPanelWidget;
+class BookmarkWidget;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -29,6 +33,7 @@ private:
     void refreshUi();
     void saveWorkspaceState();
     void restoreWorkspaceState();
+    void openSessionManager();
 
     ApplicationController controller_;
     MapCanvas* mapCanvas_ = nullptr;
@@ -41,5 +46,9 @@ private:
     AlertsWidget* alerts_ = nullptr;
     HealthPanelWidget* health_ = nullptr;
     LayerControlWidget* layers_ = nullptr;
+    NotesWidget* notes_ = nullptr;
+    ValidationPanelWidget* validation_ = nullptr;
+    BookmarkWidget* bookmarks_ = nullptr;
+    SummaryStripWidget* summaryStrip_ = nullptr;
 };
 }

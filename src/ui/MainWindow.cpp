@@ -9,12 +9,19 @@
 #include "ui/dialogs/ExportDialog.h"
 #include "ui/dialogs/ScenarioEditorDialog.h"
 #include "ui/dialogs/SettingsDialog.h"
+#include "ui/dialogs/AlertRulesDialog.h"
+#include "ui/dialogs/SessionManagerDialog.h"
+#include "ui/dialogs/WorkspaceLayoutDialog.h"
 #include "ui/widgets/AlertsWidget.h"
 #include "ui/widgets/EventLogWidget.h"
 #include "ui/widgets/HealthPanelWidget.h"
 #include "ui/widgets/InspectorWidget.h"
 #include "ui/widgets/LayerControlWidget.h"
 #include "ui/widgets/MapCanvas.h"
+#include "ui/widgets/NotesWidget.h"
+#include "ui/widgets/BookmarkWidget.h"
+#include "ui/widgets/SummaryStripWidget.h"
+#include "ui/widgets/ValidationPanelWidget.h"
 #include "ui/widgets/PlannerWidget.h"
 #include "ui/widgets/ScenarioBrowserWidget.h"
 #include "ui/widgets/TimelineWidget.h"
@@ -25,6 +32,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     setWindowTitle("Mission Control Studio Ultimate");
     mapCanvas_ = new MapCanvas(this);
     setCentralWidget(mapCanvas_);
+    summaryStrip_ = new SummaryStripWidget(this);
     buildMenus();
     buildToolbar();
     buildDocks();
@@ -32,6 +40,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     restoreWorkspaceState();
     scenarioBrowser_->setScenarioFiles(controller_.discoverScenarioFiles("assets/scenarios"));
     openScenario("assets/scenarios/convoy_guard.json");
+    summaryStrip_->setSummary("Ready | No incident selected | Rule pack: balanced_ops");
     statusBar()->showMessage("Ready");
 }
 
@@ -52,6 +61,12 @@ void MainWindow::buildMenus() {
     fileMenu->addSeparator();
     fileMenu->addAction("Exit", this, &QWidget::close);
 
+    auto* sessionMenu = menuBar()->addMenu("&Session");
+    auto* sessions = sessionMenu->addAction("Recent Sessions...");
+    connect(sessions, &QAction::triggered, this, &MainWindow::openSessionManager);
+    auto* layoutAction = sessionMenu->addAction("Workspace Layout...");
+    connect(layoutAction, &QAction::triggered, this, [this]() { WorkspaceLayoutDialog dlg(this); dlg.exec(); });
+
     auto* toolsMenu = menuBar()->addMenu("&Tools");
     auto* settings = toolsMenu->addAction("Settings");
     connect(settings, &QAction::triggered, this, [this]() {
@@ -63,6 +78,8 @@ void MainWindow::buildMenus() {
             refreshUi();
         }
     });
+    auto* rulesAction = toolsMenu->addAction("Alert Rule Packs");
+    connect(rulesAction, &QAction::triggered, this, [this]() { AlertRulesDialog dlg(this); dlg.setRulePacks({"balanced_ops.json", "aggressive_monitoring.json"}); dlg.exec(); });
     auto* editor = toolsMenu->addAction("Scenario Editor");
     connect(editor, &QAction::triggered, this, [this]() {
         ScenarioEditorDialog dlg(this);
@@ -94,6 +111,9 @@ void MainWindow::buildDocks() {
     trackTable_ = new TrackTableWidget(this);
     planner_ = new PlannerWidget(this);
     inspector_ = new InspectorWidget(this);
+    notes_ = new NotesWidget(this);
+    validation_ = new ValidationPanelWidget(this);
+    bookmarks_ = new BookmarkWidget(this);
     eventLog_ = new EventLogWidget(this);
     timeline_ = new TimelineWidget(this);
     alerts_ = new AlertsWidget(this);
@@ -105,8 +125,11 @@ void MainWindow::buildDocks() {
     addDock("Mission Planner", planner_, Qt::LeftDockWidgetArea);
     addDock("Inspector", inspector_, Qt::RightDockWidgetArea);
     addDock("Health", health_, Qt::RightDockWidgetArea);
+    addDock("Validation", validation_, Qt::RightDockWidgetArea);
     addDock("Layers", layers_, Qt::RightDockWidgetArea);
     addDock("Alerts", alerts_, Qt::BottomDockWidgetArea);
+    addDock("Notes", notes_, Qt::BottomDockWidgetArea);
+    addDock("Bookmarks", bookmarks_, Qt::BottomDockWidgetArea);
     addDock("Event Log", eventLog_, Qt::BottomDockWidgetArea);
     addDock("Timeline", timeline_, Qt::BottomDockWidgetArea);
 }
@@ -149,6 +172,9 @@ void MainWindow::refreshUi() {
         }
     }
     planner_->setRouteSummary(routeRows);
+    validation_->setMessages(controller_.validationErrors());
+    bookmarks_->setBookmarks({{45, "warning", "Route review", "Possible overlap"}, {95, "note", "Pause and inspect", "Manual review marker"}});
+    summaryStrip_->setSummary(QString("Scenario: %1 | Tracks: %2 | Alerts: %3").arg(controller_.scenario().name).arg(controller_.engine().tracks().size()).arg(controller_.alerts().size()));
 }
 
 void MainWindow::saveWorkspaceState() {
@@ -167,4 +193,10 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     saveWorkspaceState();
     QMainWindow::closeEvent(event);
 }
+}
+
+void MainWindow::openSessionManager() {
+    SessionManagerDialog dlg(this);
+    dlg.setRecentSessions({"assets/scenarios/convoy_guard.json", "assets/scenarios/border_relay.json", "assets/scenarios/urban_response.json"});
+    dlg.exec();
 }

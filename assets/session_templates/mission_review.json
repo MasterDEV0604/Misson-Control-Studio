@@ -1,0 +1,6 @@
+{
+  "name": "mission_review",
+  "visibleDocks": ["Scenario Browser", "Track Monitor", "Validation", "Inspector", "Bookmarks", "Event Log", "Timeline"],
+  "playbackRate": 1.0,
+  "followSelection": true
+}

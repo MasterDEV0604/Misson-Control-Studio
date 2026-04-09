@@ -1,0 +1,14 @@
+{
+  "name": "aggressive_monitoring",
+  "thresholds": {
+    "lowConfidence": 0.65,
+    "routeConflictDistance": 25.0,
+    "degradedHealthTriggersAlert": true
+  },
+  "policies": [
+    "warn_on_route_crossing",
+    "warn_on_health_degradation",
+    "warn_on_low_confidence",
+    "warn_on_zone_breach"
+  ]
+}
