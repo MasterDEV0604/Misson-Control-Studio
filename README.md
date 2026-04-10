@@ -1,87 +1,82 @@
 # Mission Control Studio Ultimate
 
-Mission Control Studio Ultimate is a **Qt 6 / C++17 autonomy operations workstation** for mission planning, live supervision, replay analysis, alert triage, operator note taking, and debrief export.
+Mission Control Studio Ultimate is a **Qt 6 / C++17 desktop workstation for mission planning, live supervision, replay analysis, and post-run debriefing**.
 
-This repository is designed as a **public flagship portfolio project** that feels like a real internal engineering tool. The codebase intentionally separates the product into application, domain, service, simulation, and UI layers, and it includes scenario packages, rule packs, session templates, exported artifacts, architecture notes, and CI scaffolding.
+The application is designed for teams building or evaluating autonomous systems that need a single operator console for scenario review, timeline playback, track supervision, incident triage, and session reporting.
 
-## Product vision
+## Highlights
 
-A field robotics or autonomy team needs a desktop application that can:
-- open scenario packages and validate them before execution
-- supervise multiple tracks on a shared operational map
-- highlight incidents such as route conflicts, degraded confidence, or rule violations
-- let operators add notes and bookmarks during playback
-- restore the previous workspace layout and recent session state
-- export a structured post-run debrief package
+- **Multi-dock operator workspace** with map, planner, timeline, alerts, validation, notes, inspector, and health panels
+- **Scenario package workflow** for loading mission definitions, routes, overlays, and constraints
+- **Rule-pack driven alerting** for route conflict, degraded confidence, and operational policy checks
+- **Replay and investigation tools** including timeline scrubbing, bookmarks, and operator notes
+- **Workspace persistence** for restoring layout, recent sessions, and operator preferences
+- **Debrief export** for generating mission summaries and incident reports
+- **Layered application structure** across UI, application control, domain model, services, and simulation engine
 
-This repository focuses on those workflows.
+## Primary use cases
 
-## What makes this repo feel closer to a real product
+Mission Control Studio Ultimate is intended for workflows such as:
 
-- **multi-dock workstation UI** with map, planner, alerts, notes, timeline, inspector, validation, health, and session panels
-- **scenario packages** with fictional but realistic mission metadata
-- **rule-pack loading** for operational alert profiles
-- **session persistence** for workspace layout and operator preferences
-- **bookmark and note capture** for replay/debrief workflows
-- **debrief export** with markdown summaries and incident tables
-- **docs, ADRs, scripts, configs, artifacts, and roadmap** instead of only source files
-- **CI scaffolding and tests directory** so the repository reads like an engineered application
+- pre-run scenario validation before a mission or simulation session
+- live supervision of multiple platforms on a shared 2D operational map
+- replay review after a test run or exercise
+- incident documentation and operator note capture
+- debrief generation for engineering, test, or training teams
 
-## Main workflows
+## Feature overview
 
-### 1) Pre-mission validation
-1. Open a scenario package from `assets/scenarios/`.
-2. Review issues in the validation panel.
-3. Load an alert rule pack from `assets/rulepacks/`.
-4. Confirm overlay defaults and route safety hints.
+### Mission preparation
+- open scenario packages from disk
+- validate route definitions, entity metadata, and mission settings
+- load alert rule packs for the active mission profile
+- configure overlays and workspace layout before execution
 
-### 2) Live supervision and playback
-1. Start playback or step through the mission timeline.
-2. Monitor tracks, threat rings, health state, and route conflict warnings.
-3. Add operator notes and incident bookmarks.
-4. Filter visible tracks and toggle map overlays.
+### Supervision and playback
+- monitor active tracks on a live map canvas
+- inspect entity and track state in side panels
+- review alerts, health status, and validation issues during runtime
+- scrub, pause, resume, and step through the timeline
+- add bookmarks and operator notes during playback or review
 
-### 3) Debrief and export
-1. Open the bookmark/history panel.
-2. Review major mission events and operator comments.
-3. Export a debrief package to `artifacts/example_reports/`.
-4. Use the markdown report during post-run review.
+### Debrief and reporting
+- collect timeline events and notable incidents
+- review session summary information
+- export markdown-style debrief artifacts for post-run analysis
 
-## Repository layout
+## Architecture
+
+The codebase is organized around clear engineering boundaries:
 
 ```text
 src/
-  app/                    application orchestration
-  domain/                 scenarios, tracks, notes, zones, bookmarks, health
-  services/               validation, persistence, rules, export, journaling
-  simulation/             timeline and playback engine
+  app/                    Application orchestration and session-level control
+  domain/                 Missions, tracks, routes, overlays, alerts, notes, health
+  services/               Validation, persistence, journaling, export, repository logic
+  simulation/             Timeline scheduling and playback engine
   ui/
-    dialogs/              settings, scenario editor, session manager, rules
-    models/               Qt table/list models
-    widgets/              operator workstation panels
+    dialogs/              Settings, scenario editing, rule-pack, and session dialogs
+    models/               Qt item models
+    widgets/              Dockable workstation panels and map components
 assets/
-  scenarios/              fictional mission packages
-  rulepacks/              alert and policy profiles
-  session_templates/      canned operator workspace defaults
-  workspaces/             saved window/session snapshots
-  styles/                 QSS themes
-configs/                  repo-level defaults
-scripts/                  artifact and screenshot helper scripts
-artifacts/
-  example_reports/        exported debrief examples
-  screens/                placeholder screenshot notes
-.github/workflows/        CI scaffolding
-docs/                     architecture, workflows, screenshots, ADRs
+  scenarios/              Example mission packages
+  rulepacks/              Alert policy definitions
+  session_templates/      Saved workspace/session defaults
+  workspaces/             Session state snapshots
+  styles/                 UI themes
+configs/                  Application defaults
+artifacts/                Example exported reports
+scripts/                  Utility scripts
 ```
 
 ## Build
 
 ### Requirements
-- Qt 6.5+
-- CMake 3.20+
+- Qt 6.5 or newer
+- CMake 3.20 or newer
 - C++17 compiler
 
-### Configure
+### Configure and build
 ```bash
 cmake -S . -B build -DCMAKE_PREFIX_PATH=/path/to/Qt/6.x
 cmake --build build -j
@@ -92,10 +87,43 @@ cmake --build build -j
 ./build/mission_control_studio_ultimate
 ```
 
-## Screenshot plan
+## Example workflow
 
-See `docs/screenshots.md` and `docs/mockups/` for the recommended GitHub presentation shots.
+1. Launch the application and open a scenario from `assets/scenarios/`.
+2. Review validation results and load an alert profile from `assets/rulepacks/`.
+3. Start playback and monitor tracks, overlays, and system health.
+4. Add bookmarks or notes for important moments.
+5. Export a debrief package for review after the session.
 
-## Public portfolio note
+## Outputs
 
-All missions, routes, entities, map names, and events are fictional and sanitized. The portfolio value is the **engineering shape** of the application: operator workflow, layered design, state handling, validation, persistence, replay, debrief export, and multi-panel UI composition.
+Mission Control Studio Ultimate can generate or maintain outputs such as:
+
+- session summaries
+- incident and bookmark lists
+- operator notes
+- exported debrief markdown reports
+- saved workspace layout and recent-session state
+
+## Documentation
+
+Additional design notes are available in:
+
+- `docs/architecture.md`
+- `docs/workflows.md`
+- `docs/screenshots.md`
+- `docs/adr/`
+
+## Roadmap
+
+Planned areas of expansion include:
+
+- richer map editing and waypoint authoring
+- advanced filtering and search across tracks and incidents
+- comparative replay views for side-by-side run analysis
+- charting panels for confidence, health, and route quality
+- external data adapters for simulation and analytics pipelines
+
+## Notes
+
+All bundled scenarios and mission assets are fictional and intended for software demonstration, validation, and user-interface development.
